@@ -1,0 +1,44 @@
+7. What is NLTK?
+NLTK is a Python library, which stands for Natural Language Toolkit. We use NLTK to process data in human spoken languages. NLTK allows us to apply techniques such as parsing, tokenization, lemmatization, stemming, and more to understand natural languages. It helps in categorizing text, parsing linguistic structure, analyzing documents, etc.
+
+A few of the libraries of the NLTK package that we often use in NLP are:
+
+SequentialBackoffTagger
+DefaultTagger
+UnigramTagger
+treebank
+wordnet
+FreqDist
+patterns
+RegexpTagger
+backoff_tagger
+UnigramTagger, BigramTagger, and TrigramTagger
+
+8. How to tokenize a sentence using the nltk package?
+Tokenization is a process used in NLP to split a sentence into tokens. Sentence tokenization refers to splitting a text or paragraph into sentences.
+
+For tokenizing, we will import sent_tokenize from the nltk package:
+
+  from nltk.tokenize import sent_tokenize<>
+We will use the below paragraph for sentence tokenization:
+Para = “Hi Guys. Welcome to Intellipaat. This is a blog on the NLP interview questions and answers.”
+
+  sent_tokenize(Para)
+Output:
+
+  [ 'Hi Guys.' ,
+  'Welcome to Intellipaat. ',
+  'This is a blog on the NLP interview questions and answers. ' ] 
+Tokenizing a word refers to splitting a sentence into words.
+
+Now, to tokenize a word, we will import word_tokenize from the nltk package.
+
+  from nltk.tokenize import word_tokenize
+Para = “Hi Guys. Welcome to Intellipaat. This is a blog on the NLP interview questions and answers.”
+
+  word_tokenize(Para)
+Output:
+
+  [ 'Hi' , 'Guys' , ' . ' , 'Welcome' , 'to' , 'Intellipaat' , ' . ' , 'This' , 'is' ,   'a', 'blog' , 'on' , 'the' , 'NLP' , 'interview' , 'questions' , 'and' , 'answers' , ' . ' ]
+
+
