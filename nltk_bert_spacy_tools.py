@@ -63,17 +63,14 @@ words_voc = []
 for word in better_w2v_model.wv.vocab:
       words_voc.append(better_w2v_model.wv[word])
 
-
-
-
-
-
-      
-      
 # Lemmatizer and Stemmer  
 from nltk.stem import WordNetLemmatizer,PorterStemmer
 from nltk.stem.porter import PorterStemmer
 from nltk.stem.snowball import SnowballStemmer
+
+lemmatizer = WordNetLemmatizer()
+lemmatizer.lemmatize('going', wordnet.VERB)
+
 # 
 S_stemmer = SnowballStemmer(language=”english”)
 stemmer = PorterStemmer()
@@ -102,9 +99,11 @@ nltk.download('wordnet')
 nltk.download(‘vader_lexicon’)  # VADER sentiment analysis
 nltk.download(“punkt”)	# download pre-trained punkt tokenizer for English
 
-## 
-2. Wordnet Lemmatizer
-3. Wordnet Lemmatizer with appropriate POS tag
+## 2. Wordnet Lemmatizer and 3. Wordnet Lemmatizer with appropriate POS tag
+from nltk.stem.wordnet import WordNetLemmatizer
+pass 
+
+
 
 
 
