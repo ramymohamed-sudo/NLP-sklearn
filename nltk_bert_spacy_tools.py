@@ -1,4 +1,11 @@
 
+
+# ! git clone https://github.com/laxmimerit/twitter-disaster-prediction-dataset.git
+url = 'https://raw.githubusercontent.com/laxmimerit/twitter-disaster-prediction-dataset/master/train.csv'
+tweeter = pd.read_csv(url). # of size 7613 rows 
+tweet = kgp.get_basic_features(tweeter)
+
+
 """ ........... 1- NLTK ........... """
 ! pip install -U nltk		# (nltk = python modules + datasets)
 
@@ -120,16 +127,25 @@ from textblob import TextBlob	# used for spelling corrections
 # SpaCy offers the fastest syntactic parser available on the market today. Moreover, since the toolkit is written in Cython, it’s also really speedy and efficient
 ! python3 -m spacy download en_core_web_lg    #python3 -m spacy download en_core_web_sm
 import spacy 
-nlp = spacy.load('en_core_web_sm')
-nlp = spacy.load('en',disable=['parser', 'tagger','ner'])
+nlp = spacy.load('en_core_web_lg')        # nlp = spacy.load('en',disable=['parser', 'tagger','ner'])
 nlp.max_length = 1198623
-[token.text.lower() for token in nlp(doc_text) if token.text not in '\n\n \n\n\n!"-#$%&()--.*+,-/:;<=>?@[\\]^_`{|}~\t\n ']
+# doc = nlp('x')    # x = 'cat dog'
+# vec = doc.vector        # now, we need to get this vector in the form of numpy array 
+tweet['vec'] = tweet['text'].apply(lambda x: nlp('x').vector)     # This is word2vec word embedding from Spacy 
+X = tweet['vec'].to_numpy()
+X = X.reshape(-1,1)
+X = np.concatenate(np.concatenate(X,axis=0),axis=0).reshape(-1,300)           # X.shape = (7613,300)
+
 
 doc = nlp(u'Tesla is looking at buying U.S. startup for $6 million')    # u for unicode
 for token in doc:
   print(token.text, token.pos_, token.dep_,token.lemma_,token.tag_,token.dep_,token.shape_,token.is_alpha,token.is_stop) # Token.dep_ for dependencies, e.g., 'nsubj' for nominal subject
   spacy.explain('PROPN')
   spacy.explain('nsubj')
+
+# Tokenization with Spacy
+[token.text.lower() for token in nlp(doc_text) if token.text not in '\n\n \n\n\n!"-#$%&()--.*+,-/:;<=>?@[\\]^_`{|}~\t\n ']
+
 
 nlp.pipeline
 nlp.pipe_names		# ['tagger', 'parser', 'ner']
